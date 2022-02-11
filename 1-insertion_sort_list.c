@@ -14,31 +14,28 @@ void insertion_sort_list(listint_t **list)
 	aux = travel;
 	while (aux)
 	{
-		if (travel->prev)
+		while (travel->prev)
+		{
+			if (travel->n < travel->prev->n)
 			{
-				if (travel->n < travel->prev->n)
-				{
-					travel->prev->next = travel->next;
-					if (travel->next)
-						travel->next->prev = travel->prev;
-					travel->next = travel->prev;
-					travel->prev = travel->prev->prev;
-					if (travel->prev)
-						travel->prev->next = travel;
-					travel->next->prev = travel;
-					if (!travel->prev)
-						*list = travel;
-					print_list(*list);
-					aux = travel->next;
-				}
-				else
-				{
-					travel = travel->next;
-				}
+				travel->prev->next = travel->next;
+				if (travel->next)
+					travel->next->prev = travel->prev;
+				travel->next = travel->prev;
+				travel->prev = travel->prev->prev;
+				if (travel->prev)
+					travel->prev->next = travel;
+				travel->next->prev = travel;
+				if (!travel->prev)
+					*list = travel;
+				print_list(*list);
+				aux = travel->next;
 			}
-		else
-			break;
-		if (aux->next != NULL)
-			aux = aux->next;
+			else
+			{
+				travel = travel->next;
+			}
+		}
+		travel = aux->next;
 	}
 }
