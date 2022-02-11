@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 /**
@@ -11,22 +12,23 @@
 
 void bubble_sort(int *array, size_t size)
 {
-/** lo encararia con un i, j, flag y un temp y supongo que un size -1 seria el delimitador*/
-	size_t i;
-	size_t j;
-	size_t temp;
+	size_t i, j;
+	size_t aux = size - 1;
+	size_t x;
 	
-	if (!array || !size)
+	if (!array || !size || size <= 0)
 		return;
-
-	for (i = 0; i < size, i++)
+	for (j = 0; j < aux; j++)
 	{
-		flag = =0;
-		/*aca creo deberia ir una flag? y un loop para j*/
-
-		if /*condicion if array[j] [j +1] seria?*/
+		for (i = 0; i < aux; i++)
 		{
-			/* aca adentro podria venir un temp = array[j]) y cuando la flag sea 1 hacer un print array?*/
+			if (array[i] > array[i + 1])
+			{
+				x = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = x;
+				print_array(array, size);
+			}
 		}
-
+	}
 }
