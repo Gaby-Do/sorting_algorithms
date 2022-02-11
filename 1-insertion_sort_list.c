@@ -8,21 +8,37 @@
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *travel;
+	listint_t *aux;
 
-	travel = *list;
-	while (travel->next)
+	travel = (*list)->next;
+	aux = travel;
+	while (aux)
 	{
-		if (travel->n > travel->next->n)
-		{
-			if (travel->prev)
-				travel->prev->next = travel->next;
-			if (travel->next)
-				travel->next->prev = travel->prev;
-			travel->prev = travel->next;
-			travel->next = travel->next->next;
-			travel->next->prev = travel;
-			travel->next->next = travel;
-			print_list(*list);
-		}
+		if (travel->prev)
+			{
+				if (travel->n < travel->prev->n)
+				{
+					travel->prev->next = travel->next;
+					if (travel->next)
+						travel->next->prev = travel->prev;
+					travel->next = travel->prev;
+					travel->prev = travel->prev->prev;
+					if (travel->prev)
+						travel->prev->next = travel;
+					travel->next->prev = travel;
+					if (!travel->prev)
+						*list = travel;
+					print_list(*list);
+					aux = travel->next;
+				}
+				else
+				{
+					travel = travel->next;
+				}
+			}
+		else
+			break;
+		if (aux->next != NULL)
+			aux = aux->next;
 	}
 }
