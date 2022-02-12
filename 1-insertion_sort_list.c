@@ -7,35 +7,44 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *travel;
-	listint_t *aux;
+	bool flag = false;
+	listint_t *travel = NULL, *aux = NULL;
 
-	travel = (*list)->next;
-	aux = travel;
-	while (aux)
+	if (!list || !(*list) || !(*list)->next)
+		return;
+
+	travel = *list;
+	while (travel->next)
 	{
-		while (travel->prev)
+		if (travel->n > travel->next->n)
 		{
-			if (travel->n < travel->prev->n)
-			{
+			travel->next->prev = travel->prev; /* separar travel de la lista */
+			if (travel->next->prev)
 				travel->prev->next = travel->next;
-				if (travel->next)
-					travel->next->prev = travel->prev;
-				travel->next = travel->prev;
-				travel->prev = travel->prev->prev;
-				if (travel->prev)
-					travel->prev->next = travel;
-				travel->next->prev = travel;
-				if (!travel->prev)
-					*list = travel;
-				print_list(*list);
-				aux = travel->next;
-			}
 			else
+				*list = travel->next;
+
+			travel->prev = travel->next; /* adjuntar travel después del siguiente nodo */
+			travel->next = travel->next->next; /* mover el siguiente nodo hacia atrás */
+			travel->prev->next = travel;
+			if (travel->next)
+				travel->next->prev = travel;
+
+			travel = travel->prev;
+			print_list(*list);
+
+			if (travel->prev && travel->prev->n > travel->n) /* cambiar de nuevo */
 			{
-				travel = travel->next;
+				if (!flag)
+					aux = travel->next;
+				flag = true;
+				travel = travel->prev;
+				continue;
 			}
 		}
-		travel = aux->next;
+		if (!flag) /* no se necesitan intercambios */
+			travel = travel->next;
+		else /* se hicieron todos los intercambios, continua recorriendo la lista */
+			travel = aux, flag = false;
 	}
 }
