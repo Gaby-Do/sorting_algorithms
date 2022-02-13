@@ -24,8 +24,8 @@ void insertion_sort_list(listint_t **list)
 			else
 				*list = travel->next;
 
-			travel->prev = travel->next; /* adjuntar travel después del siguiente nodo */
-			travel->next = travel->next->next; /* mover el siguiente nodo hacia atrás */
+			travel->prev = travel->next; /* adjuntar travel después del sig. nodo */
+			travel->next = travel->next->next; /* mover el sig. nodo hacia atrás */
 			travel->prev->next = travel;
 			if (travel->next)
 				travel->next->prev = travel;
