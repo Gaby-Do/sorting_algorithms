@@ -12,7 +12,6 @@
 
 void merging(size_t low, size_t m, size_t high, int *dest, int *origen)
 {
-<<<<<<< HEAD
 	size_t i = low, j = m, k;
 
 	printf("Merging...\n");
@@ -56,66 +55,23 @@ void splitANDmerge(size_t low, size_t high, int *array, int *copia)
 }
 
 /**
- * merge_sort -  sorts array of ints in ascending order w/ Merge sort algorithm
-=======
-	size_t low = 0, high = size - 1;
-	int *aux;
-
-	aux = malloc(sizeof(int) * size);
-	if (!aux)
-		return;
-	split(array, low, high, size);
-}
-
-
-/**
- * split - recursively sorts an array
->>>>>>> 4e13e6edd29f3be339fdab412dff664223f9ce8a
- * @array: array to be sorted
- * @size: size of array
- */
-<<<<<<< HEAD
+* merge_sort - Sort an array of integers in ascending order
+* using the Merge sort algorithm.
+* @array: Array of integers to be sorted
+* @size: Size of the array
+*/
 void merge_sort(int *array, size_t size)
-=======
-int split(int *array, size_t low, size_t high, size_t size)
->>>>>>> 4e13e6edd29f3be339fdab412dff664223f9ce8a
 {
 	size_t i;
 	int *copia = NULL;
 
-<<<<<<< HEAD
 	if (!array || size < 2)
 		return;
 
 	copia = malloc(sizeof(int) * size);
-
 	if (!copia)
 		return;
-=======
-	if (low < high)
-	{
-		mid = (low + high) / 2;
-		if (mid - 1 != low)
-			split(array, low, mid - 1, size);
-		if (mid != high)
-			split(array, mid, high, size);
-		merge(low, mid, high);
-	}
-	return (*array);
-}
-
-/**
- * merge - rebuilds the sorted array
- * @low: position 0 in array
- * @mid: middle point
- * @high: final position in array
- */
-void merge(size_t low, size_t mid, size_t high)
-{
-}
->>>>>>> 4e13e6edd29f3be339fdab412dff664223f9ce8a
-
-	/*copia array*/
+	/* copia array */
 	for (i = 0; i < size; i++)
 		copia[i] = array[i];
 
