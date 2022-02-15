@@ -27,6 +27,9 @@ void merging(size_t low, size_t m, size_t high, int *dest, int *origen)
 		else
 			dest[k] = origen[j], j++;
 	}
+
+	printf("[Done]: ");
+	print_array(dest + low, high - low);
 }
 
 
@@ -42,16 +45,18 @@ void splitANDmerge(size_t low, size_t high, int *array, int *copia)
 {
 	size_t m;
 
+	/* si el tamaño de ejecución == 1 lo considera ordenado */
 	if (high - low < 2)
 		return;
-
 	/*split*/
-	if (high % 2 == 0)
-		m = (low + high) / 2;
+	m = (low + high) / 2;
 	/*recursion*/
-	splitANDmerge(low, m - 1, array, copia);
-	splitANDmerge(m + 1, high, array, copia);
+	splitANDmerge(low, m, array, copia);
+	splitANDmerge(m, high, array, copia);
 	merging(low, m, high, array, copia);
+
+	for (m = low; m < high; m++)
+		copia[m] = array[m];
 }
 
 /**
